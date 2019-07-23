@@ -104,11 +104,11 @@ export default class App extends React.Component {
 ];
 
 renderItem({ name }) {
-return (
-  <View style={styles.item}>
-    <Text style={styles.text}>{name}</Text>
-  </View>
-);
+  return (
+    <View style={styles.item} key={name}>
+      <Text style={styles.text}>{name}</Text>
+    </View>
+  );
 }
 
 render() {
