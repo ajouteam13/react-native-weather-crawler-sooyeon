@@ -34,10 +34,9 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <CounterButton counter={0} />
-        <CounterButton count={1} />
-        <CounterButton counter={2} />
-        <CounterButton counter={3} />
+        <Text>1</Text>
+        <Text>2</Text>
+        <Text>3</Text>
       </View>
     );
   }
@@ -49,8 +48,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  buttonContainer: {
-    width: '100%',
   },
 });
