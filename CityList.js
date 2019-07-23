@@ -1,11 +1,17 @@
-import React from 'react';
-import { FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React ,{Component} from 'react';
+import { FlatList, StyleSheet, Text, TouchableOpacity,TextInput,View } from 'react-native';
 import { Constants } from 'expo';
 
-export default class CityList extends React.Component {
+
+export default class CityList extends Component {
   static navigationOptions = {
     title: 'Cities',
   };
+
+  state = {
+    text: ''
+  }; //
+
 
   constructor(props) {
     super(props);
@@ -14,6 +20,17 @@ export default class CityList extends React.Component {
       cities: [],
     };
   }
+  handleChangeText = text => {
+		this.setState({ text });
+	};
+
+	handleSubmitEditing = () => {
+		if (!this.state.text) return;
+
+		this.props.onSubmit(this.state.text);
+		this.setState({ text: '' });
+	};
+
 
   componentDidMount() {
     fetch('http://demo6468405.mockable.io/weather-crawlers/cities')
@@ -45,16 +62,31 @@ export default class CityList extends React.Component {
 
   render() {
     return (
+      <View style={styles.searchBar}>
       <FlatList style={styles.container}
                 renderItem={({ item }) => this.renderItem(item)}
                 keyExtractor={item => item}
                 data={this.state.cities}
       />
+      
+      <TextInput
+        value={this.state.text}
+        autoCorrect={false}
+        placeholder={this.props.placeholder}
+        placeholderTextColor="#ffffff"
+        underlineColorAndroid="transparent"
+        style={styles.textInput}
+        clearButtonMode="always"
+        onChangeText={this.handleChangeText}
+        onSubmitEditing={this.handleSubmitEditing}
+      />
+    </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -67,10 +99,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
     borderWidth: 1,
-    borderColor: 'orange',
+    borderColor: 'blue',
   },
   text: {
     fontSize: 20,
     textAlign: 'center',
+  },
+
+  searchBar: {
+		flex: 1,
+    paddingTop: 50
+  },
+  
+	textInput: {
+		width: 300,
+		height: 50,
+		marginTop: 40,
+		backgroundColor: '#ccbfec',
+		marginHorizontal: 20,
+		paddingHorizontal: 10,
+		alignSelf: 'center',
+		color: '#ffffff'
   }
 });
