@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, ScrollView, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { Constants } from 'expo';
 
 class CounterButton extends React.Component {
@@ -112,11 +112,12 @@ renderItem({ name }) {
 }
 
 render() {
-return (
-  <ScrollView style={styles.container}>
-    {this.fruits.map(this.renderItem)}
-  </ScrollView>
-);
+  return (
+    <FlatList style={styles.container}
+              renderItem={({ item }) => this.renderItem(item)}
+              data={this.fruits}
+    />
+  );
 }
 }
 
