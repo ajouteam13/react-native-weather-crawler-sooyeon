@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import { Constants } from 'expo';
 
 class CounterButton extends React.Component {
   static defaultProps = {
@@ -14,19 +15,19 @@ class CounterButton extends React.Component {
     };
   }
 
-   clickHandler = () => {
+  clickHandler = () => {
     this.setState({
       counter: this.state.counter + 1,
     });
   };
 
-  render(){
-   return (
-    <View style={styles.buttonContainer}>
-      <Text>{this.state.counter}</Text>
-     <Button title={'click me!'} onPress={this.clickHandler}/>
-    </View>
-   );
+  render() {
+    return (
+      <View style={styles.buttonContainer}>
+        <Text>{this.state.counter}</Text>
+        <Button title={'click me!'} onPress={this.clickHandler}/>
+      </View>
+    );
   }
 }
 
@@ -34,9 +35,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>1</Text>
-        <Text style={[styles.text, styles.text2]}>2</Text>
-        <Text style={styles.text}>3</Text>
+       <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
       </View>
     );
   }
@@ -46,21 +45,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-  text: {
-    flex: 1,
-    borderWidth: 1,
+    marginTop: Constants.statusBarHeight,
+
     borderColor: 'red',
+    borderWidth: 2,
 
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    fontSize: 24,
-    fontWeight: 'bold',
   },
 
-  text2: {
-    flex: 2,
-  }
 });
